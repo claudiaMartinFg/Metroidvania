@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  jumpForce: 5
+  jumpForce: 6
   animator: {fileID: 1496228115}
 --- !u!1 &519420028
 GameObject:
@@ -354,6 +354,7 @@ GameObject:
   m_Component:
   - component: {fileID: 591581186}
   - component: {fileID: 591581185}
+  - component: {fileID: 591581187}
   m_Layer: 0
   m_Name: near-clouds-capa4
   m_TagString: Untagged
@@ -428,6 +429,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &591581187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591581184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c0410b4f804734bab98f8a1ac838bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 519420032}
+  percent: 0.4
 --- !u!1 &601492770
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,6 +453,7 @@ GameObject:
   m_Component:
   - component: {fileID: 601492772}
   - component: {fileID: 601492771}
+  - component: {fileID: 601492773}
   m_Layer: 0
   m_Name: mountains-capa6
   m_TagString: Untagged
@@ -512,6 +528,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &601492773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601492770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c0410b4f804734bab98f8a1ac838bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 519420032}
+  percent: 0.1
 --- !u!1 &632763682
 GameObject:
   m_ObjectHideFlags: 0
@@ -2892,6 +2922,7 @@ GameObject:
   m_Component:
   - component: {fileID: 955707820}
   - component: {fileID: 955707819}
+  - component: {fileID: 955707821}
   m_Layer: 0
   m_Name: trees-capa5
   m_TagString: Untagged
@@ -2966,6 +2997,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &955707821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955707818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c0410b4f804734bab98f8a1ac838bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 519420032}
+  percent: 0.2
 --- !u!1 &1017813121
 GameObject:
   m_ObjectHideFlags: 0
@@ -2976,6 +3021,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1017813123}
   - component: {fileID: 1017813122}
+  - component: {fileID: 1017813124}
   m_Layer: 0
   m_Name: far-mountains-capa3
   m_TagString: Untagged
@@ -3050,6 +3096,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1017813124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017813121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c0410b4f804734bab98f8a1ac838bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 519420032}
+  percent: 0.6
 --- !u!1 &1084158685
 GameObject:
   m_ObjectHideFlags: 0
@@ -3060,6 +3120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1084158687}
   - component: {fileID: 1084158686}
+  - component: {fileID: 1084158688}
   m_Layer: 0
   m_Name: sky-capa1
   m_TagString: Untagged
@@ -3134,6 +3195,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1084158688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084158685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c0410b4f804734bab98f8a1ac838bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 519420032}
+  percent: 1
 --- !u!1 &1292834374
 GameObject:
   m_ObjectHideFlags: 0
@@ -3189,6 +3264,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1340748077}
   - component: {fileID: 1340748076}
+  - component: {fileID: 1340748078}
   m_Layer: 0
   m_Name: far-clouds-capa2
   m_TagString: Untagged
@@ -3263,6 +3339,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1340748078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1340748075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c0410b4f804734bab98f8a1ac838bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 519420032}
+  percent: 0.8
 --- !u!1 &1496228112
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,7 +22,7 @@ public class CameraController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
 
         float x = Mathf.Clamp(player.position.x + camOffset.x, limitX.x, limitX.y);
@@ -30,8 +30,6 @@ public class CameraController : MonoBehaviour
         float z = player.position.z + camOffset.z;
 
         transform.position = new Vector3(x, y, z);
-
-
         
     }
 }
