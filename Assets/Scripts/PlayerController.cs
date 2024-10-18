@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce;
     [SerializeField] private Animator animator;
 
+    private bool isGrounded;
 
     void Start()
     {
@@ -20,18 +21,16 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         horizontal = Input.GetAxis("Horizontal");
-        // transform.Translate(Vector3.right * horizontal * speed* Time.deltaTime);
 
-        if (horizontal > 0) 
+        if (horizontal > 0)
         {
             transform.eulerAngles = Vector3.zero;
-            animator.SetBool("isRunning",true);
+            animator.SetBool("isRunning", true);
         }
         else if (horizontal < 0)
         {
             transform.eulerAngles = new Vector3(0, 180, 0);
             animator.SetBool("isRunning", true);
-
         }
         else
         {
@@ -40,24 +39,46 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
-           jump = true;
+            jump = true;
         }
-
     }
+
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(speed * horizontal, rb.velocity.y);
 
-        if (jump == true && rb.velocity.y == 0)
+        if (jump)
         {
-            rb.AddForce(Vector2.up * jumpForce);
-            animator.SetBool("isJumping", true);
+            if (isGrounded) 
+            {
+                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                animator.SetBool("isJumping", true);
+                isGrounded = false;
+            }
             jump = false;
         }
-        else if(rb.velocity.y == 0)
+
+        if (rb.velocity.y < 0)
         {
             animator.SetBool("isJumping", false);
         }
+    }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+            animator.SetBool("isGrounded", true);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+            animator.SetBool("isGrounded", false);
+        }
     }
 }
