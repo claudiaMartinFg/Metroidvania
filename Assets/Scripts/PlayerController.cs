@@ -52,11 +52,10 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(Vector2.up * jumpForce);
             animator.SetBool("isJumping", true);
-
+            jump = false;
         }
         else if(rb.velocity.y == 0)
         {
-            jump = false;
             animator.SetBool("isJumping", false);
         }
 
