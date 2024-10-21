@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animator;
 
     private bool isGrounded;
+    public bool isAttacking;
 
     void Start()
     {
@@ -41,21 +43,32 @@ public class PlayerController : MonoBehaviour
         {
             jump = true;
         }
+
+        if (Input.GetButtonDown("Fire1")==true)
+        {
+
+            animator.SetTrigger("isAttacking");
+            isAttacking = true;
+        }
     }
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(speed * horizontal, rb.velocity.y);
 
-        if (jump)
+        if (!isAttacking)
         {
-            if (isGrounded) 
+            rb.velocity = new Vector2(speed * horizontal, rb.velocity.y);
+
+            if (jump)
             {
-                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-                animator.SetBool("isJumping", true);
-                isGrounded = false;
+                if (isGrounded)
+                {
+                    rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                    animator.SetBool("isJumping", true);
+                    isGrounded = false;
+                }
+                jump = false;
             }
-            jump = false;
         }
 
         if (rb.velocity.y < 0)
