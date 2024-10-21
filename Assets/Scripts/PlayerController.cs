@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -22,29 +23,40 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        horizontal = Input.GetAxis("Horizontal");
 
-        if (horizontal > 0)
+        if (!isAttacking)
         {
-            transform.eulerAngles = Vector3.zero;
-            animator.SetBool("isRunning", true);
-        }
-        else if (horizontal < 0)
-        {
-            transform.eulerAngles = new Vector3(0, 180, 0);
-            animator.SetBool("isRunning", true);
+            horizontal = Input.GetAxis("Horizontal");
+
+            if (horizontal > 0)
+            {
+                transform.eulerAngles = Vector3.zero;
+                animator.SetBool("isRunning", true);
+            }
+            else if (horizontal < 0)
+            {
+                transform.eulerAngles = new Vector3(0, 180, 0);
+                animator.SetBool("isRunning", true);
+            }
+            else
+            {
+                animator.SetBool("isRunning", false);
+            }
         }
         else
         {
-            animator.SetBool("isRunning", false);
+
+            horizontal = 0;
+
         }
+       
 
         if (Input.GetButtonDown("Jump"))
         {
             jump = true;
         }
 
-        if (Input.GetButtonDown("Fire1")==true)
+        if (Input.GetButtonDown("Fire1")==true && rb.velocity.y==0)
         {
 
             animator.SetTrigger("isAttacking");
@@ -93,5 +105,21 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
             animator.SetBool("isGrounded", false);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        switch (collision.tag)
+        {
+            case "Enemigo":
+
+                Debug.Log("he tocado al enemigo");
+
+             break;
+
+    }
+
+       
+
     }
 }
