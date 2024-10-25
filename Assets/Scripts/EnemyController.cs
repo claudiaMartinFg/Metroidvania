@@ -20,21 +20,21 @@ public class EnemyController : MonoBehaviour
     private Transform player;
 
     [SerializeField] private float stopDistance;
-    private Rigidbody2D rb;
+    [SerializeField] private Rigidbody2D rb;
     private float timePass;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
+       // rb = GetComponent<Rigidbody2D>();
 
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (playerDetection)
+        if (playerDetection && GameManager.instance.playerLife > 0)
         {
             Vector3 vectorDistancia = player.transform.position - transform.position;
             Vector3 direccion = vectorDistancia.normalized;
@@ -76,12 +76,20 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+  /*  private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            playerDetection = false;
+        }
+    }*/
+
     private void Attack()
     {
         if (timePass>=attackRate)
         {
             timePass = 0;
-
+            animator.SetTrigger("isAttacking");
             //programar ataque 
         }
     }

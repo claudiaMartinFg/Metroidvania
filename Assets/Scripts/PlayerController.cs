@@ -45,9 +45,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-
             horizontal = 0;
-
         }
        
 
@@ -64,6 +62,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    
     private void FixedUpdate()
     {
 
@@ -115,11 +114,24 @@ public class PlayerController : MonoBehaviour
 
                 Debug.Log("he tocado al enemigo");
 
-             break;
+                break;
+        }
+
+    }
+    public void TakeDamage(float _damage)
+    {
+        GameManager.instance.playerLife = _damage;
+        if (GameManager.instance.playerLife == 0)
+        {
+            // programar canvas muere? PlayerDeath();
+
+        }
+        else
+        {
+            animator.SetTrigger("Kill");
+        }
 
     }
 
-       
-
-    }
 }
+
