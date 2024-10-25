@@ -24,7 +24,6 @@ public class EnemyController : MonoBehaviour
 
     private float timePass;
 
-    // Start is called before the first frame update
     void Start()
     {
         //animator = GetComponent<Animator>();
@@ -32,7 +31,6 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (playerDetection && GameManager.instance.playerLife > 0)
@@ -54,11 +52,16 @@ public class EnemyController : MonoBehaviour
             {
 
                 rb.velocity = new Vector2(speed * direccion.x, rb.velocity.y);
-
+                animator.SetBool("walk", true);
             }
             else
             {
-                rb.velocity = new Vector3(0, rb.velocity.y);
+                if (isHit == false){
+
+                    rb.velocity = new Vector3(0, rb.velocity.y);
+                    animator.SetBool("walk", false);
+                    Attack();
+                }
             }
         }
 
@@ -70,20 +73,18 @@ public class EnemyController : MonoBehaviour
         if (collision.tag == "Player")
         {
             player = collision.transform;
-
             playerDetection = true;
-
-
         }
     }
 
-  /*  private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             playerDetection = false;
+            animator.SetBool("walk", false);
         }
-    }*/
+    }
 
     private void Attack()
     {
