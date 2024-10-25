@@ -15,9 +15,11 @@ public class RangedEnemy : EnemyController
     }
     public void ThrowProjectile()
     {
-
         GameObject clone = Instantiate(proyectilPrefab, spawnpointProjectile.position, spawnpointProjectile.rotation);
-        clone.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(forceProjectile,0));
+
+        Rigidbody2D rb = clone.GetComponent<Rigidbody2D>();
+
+        rb.AddRelativeForce(clone.transform.right * forceProjectile);
         Destroy(clone,5f);
     }
 

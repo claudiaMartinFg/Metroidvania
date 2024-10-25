@@ -15,18 +15,19 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private float damagingRate;
 
-    private Animator animator;
+    [SerializeField] private Animator animator;
 
     private Transform player;
 
     [SerializeField] private float stopDistance;
     [SerializeField] private Rigidbody2D rb;
+
     private float timePass;
 
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
        // rb = GetComponent<Rigidbody2D>();
 
     }
@@ -89,8 +90,7 @@ public class EnemyController : MonoBehaviour
         if (timePass>=attackRate)
         {
             timePass = 0;
-            animator.SetTrigger("isAttacking");
-            //programar ataque 
+            animator.SetTrigger("attack");
         }
     }
 
