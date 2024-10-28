@@ -118,18 +118,21 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
     public void TakeDamage(float _damage)
     {
-        GameManager.instance.playerLife = _damage;
-        if (GameManager.instance.playerLife == 0)
-        {
-            // programar canvas muere? PlayerDeath();
+       /* GameManager.instance.playerLife = _damage;
 
+        life -= _damage;
+
+        if (life == 0)
+        {
+            Death();
         }
         else
         {
             animator.SetTrigger("Kill");
-        }
+        }*/
 
     }
 

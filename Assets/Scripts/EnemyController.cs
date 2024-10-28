@@ -22,12 +22,14 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float stopDistance;
     [SerializeField] private Rigidbody2D rb;
 
+    private bool isAttacking;
+    private bool isHit;
+
+
     private float timePass;
 
     void Start()
     {
-        //animator = GetComponent<Animator>();
-       // rb = GetComponent<Rigidbody2D>();
 
     }
 
@@ -79,12 +81,14 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.tag == "Player" && isAttacking==false)
         {
+            rb.velocity = new Vector3(0, rb.velocity.y);
             playerDetection = false;
             animator.SetBool("walk", false);
         }
     }
+
 
     private void Attack()
     {
@@ -92,7 +96,25 @@ public class EnemyController : MonoBehaviour
         {
             timePass = 0;
             animator.SetTrigger("attack");
+            isAttacking = true;
         }
+    }
+
+
+    public void DestroyEnemy()
+    {
+        Destroy(gameObject);
+    }
+
+    public void SetIsHitFalse()
+    {
+
+        isHit = false;
+    }
+
+    public void IsNotAttacking()
+    {
+        isAttacking = false;
     }
 
 }
