@@ -16,9 +16,12 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     public bool isAttacking;
 
+    private LevelManager levelManager;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
     }
 
     void Update()
@@ -121,18 +124,20 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float _damage)
     {
-       /* GameManager.instance.playerLife = _damage;
+        GameManager.instance.playerLife -= _damage;
+        levelManager.UpdateLife();
 
-        life -= _damage;
-
-        if (life == 0)
+        if (GameManager.instance.life <= 0)
         {
-            Death();
+            //muerte
+            animator.SetTrigger("death");
+            this.enabled = false;
         }
         else
         {
-            animator.SetTrigger("Kill");
-        }*/
+            //hit
+            animator.SetTrigger("hit");
+        }
 
     }
 
