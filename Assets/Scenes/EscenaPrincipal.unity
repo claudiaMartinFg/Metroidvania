@@ -3359,10 +3359,10 @@ MonoBehaviour:
   health: 0
   speed: 0
   playerDetection: 0
-  attackRate: 0
-  damagingRate: 0
+  attackRate: 1
+  damagingRate: 1
   animator: {fileID: 686177844}
-  stopDistance: 1
+  stopDistance: 3
   rb: {fileID: 686177847}
 --- !u!61 &686177849
 BoxCollider2D:
