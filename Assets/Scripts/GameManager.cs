@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public GameData gameData;       
-    public float playerLife;
+    //public float playerLife;
 
     private void Awake()
     {
@@ -24,12 +24,14 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.S))
+        if(Input.GetKeyDown(KeyCode.G))
         {
+            gameData.PlayerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
             SaveData();
+            Debug.Log("He guardado");
         }
 
-        if(Input.GetKey(KeyCode.RightControl) && Input.GetKeyDown(KeyCode.D))
+        if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.D))
         {
             PlayerPrefs.DeleteAll();
         }
@@ -50,6 +52,9 @@ public class GameManager : MonoBehaviour
         else
         {
             gameData= new GameData();
+            gameData.Life = 100;
+            gameData.MaxLife = 100;
+            gameData.PlayerPos = new Vector3(-4.18f, -1.98f, 0);
         }
 
     }

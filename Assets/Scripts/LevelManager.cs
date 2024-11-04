@@ -8,15 +8,15 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private Image lifeBar;
 
-    public void UpdateLife()
-    {
-        lifeBar.fillAmount = GameManager.instance.life / GameManager.instance.maxLife;
-    }
-
-    // Start is called before the first frame update
     void Start()
     {
+        GameObject.FindGameObjectWithTag("Player").transform.position = GameManager.instance.gameData.PlayerPos;
         UpdateLife();
+    }
+
+    public void UpdateLife()
+    {
+        lifeBar.fillAmount = GameManager.instance.gameData.Life / GameManager.instance.gameData.MaxLife;
     }
 
 }

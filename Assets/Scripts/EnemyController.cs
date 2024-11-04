@@ -35,7 +35,7 @@ public class EnemyController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (playerDetection && GameManager.instance.playerLife > 0)
+        if (playerDetection && GameManager.instance.gameData.Life > 0)
         {
             Vector3 vectorDistancia = player.transform.position - transform.position;
             Vector3 direccion = vectorDistancia.normalized;

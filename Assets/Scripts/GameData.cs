@@ -6,12 +6,10 @@ using UnityEngine;
 [Serializable]
 public class GameData 
 {
-    private float life;
-    private float maxLife;
-    private int currentScene;
-    private Vector3 playerPos;
-
-    public float minLife;
+    [SerializeField] private float life;
+    [SerializeField] private float maxLife;
+    [SerializeField] private int currentScene;
+    [SerializeField] private Vector3 playerPos;
 
     public float Life
     {
