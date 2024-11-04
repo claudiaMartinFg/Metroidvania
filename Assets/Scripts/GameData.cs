@@ -9,6 +9,7 @@ public class GameData
     private float life;
     private float maxLife;
     private int currentScene;
+    private Vector3 playerPos;
 
     public float minLife;
 
@@ -28,5 +29,10 @@ public class GameData
     {
         get { return currentScene; }
         set { currentScene = value; }
+    }
+    public Vector3 PlayerPos
+    {
+        get { return playerPos; }
+        set { playerPos = value; }
     }
 }

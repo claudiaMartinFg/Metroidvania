@@ -4,8 +4,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public float life;
-    public float maxLife;
+    public GameData gameData;       
     public float playerLife;
 
     private void Awake()
@@ -19,21 +18,39 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
 
-    void Start()
+        //Temporal
+        LoadData();
+    }
+    private void Update()
     {
-        playerLife = maxLife; 
-    }
+        if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.S))
+        {
+            SaveData();
+        }
 
+        if(Input.GetKey(KeyCode.RightControl) && Input.GetKeyDown(KeyCode.D))
+        {
+            PlayerPrefs.DeleteAll();
+        }
+    }
     public void SaveData()
     {
-        PlayerPrefs.SetFloat("vida", life);
-        PlayerPrefs.set
+        string data = JsonUtility.ToJson(gameData);
+        PlayerPrefs.SetString("gameData", data);
     }
 
     public void LoadData()
     {
-        life = PlayerPrefs.GetFloat("vida");
+        if (PlayerPrefs.HasKey("gameData") == true)
+        {
+            string data = PlayerPrefs.GetString("gameData");
+            gameData = JsonUtility.FromJson<GameData>(data);
+        }
+        else
+        {
+            gameData= new GameData();
+        }
+
     }
 }

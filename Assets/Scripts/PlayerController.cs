@@ -124,10 +124,10 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float _damage)
     {
-        GameManager.instance.playerLife -= _damage;
+        GameManager.instance.gameData.Life -= _damage;
         levelManager.UpdateLife();
 
-        if (GameManager.instance.life <= 0)
+        if (GameManager.instance.gameData.Life <= 0)
         {
             //muerte
             animator.SetTrigger("death");
