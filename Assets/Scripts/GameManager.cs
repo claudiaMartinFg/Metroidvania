@@ -25,4 +25,15 @@ public class GameManager : MonoBehaviour
     {
         playerLife = maxLife; 
     }
+
+    public void SaveData()
+    {
+        PlayerPrefs.SetFloat("vida", life);
+        PlayerPrefs.set
+    }
+
+    public void LoadData()
+    {
+        life = PlayerPrefs.GetFloat("vida");
+    }
 }
