@@ -11,6 +11,7 @@ public class GameData
     [SerializeField] private int currentScene;
     [SerializeField] private Vector3 playerPos;
 
+
     public float Life
     {
         get{ return life; }
