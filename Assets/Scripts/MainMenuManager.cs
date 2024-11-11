@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,7 +28,21 @@ public class MainMenuManager : MonoBehaviour
 
     public void RevisarPartidas()
     {
+        for(int i=0; i < 3; i++){
 
+            if (PlayerPrefs.HasKey("gameData" + i.ToString()))
+            {
+                GameManager.instance.LoadData(i);
+
+                partidaPanel.transform.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text =
+                    "Partida" + i + "\n Vida" + GameManager.instance.gameData.Life;
+            }
+            else
+            {
+                partidaPanel.transform.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Partida Vacía";
+
+            }
+        }
 
     }
 
