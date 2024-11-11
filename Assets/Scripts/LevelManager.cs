@@ -8,9 +8,13 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private Image lifeBar;
 
+    [SerializeField] private Transform[] spawnPoints;
+
     void Start()
     {
-        GameObject.FindGameObjectWithTag("Player").transform.position = GameManager.instance.gameData.PlayerPos;
+        GameObject.FindGameObjectWithTag("Player").transform.position = spawnPoints[GameManager.instance.nextSpawnPoint].position;
+        GameObject.FindGameObjectWithTag("Player").transform.rotation = spawnPoints[GameManager.instance.nextSpawnPoint].rotation;
+
         UpdateLife();
     }
 

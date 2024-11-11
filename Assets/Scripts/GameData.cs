@@ -9,6 +9,8 @@ public class GameData
     [SerializeField] private float life;
     [SerializeField] private float maxLife;
     [SerializeField] private int currentScene;
+    [SerializeField] private int saveSlot;
+
     [SerializeField] private Vector3 playerPos;
 
 
@@ -33,5 +35,11 @@ public class GameData
     {
         get { return playerPos; }
         set { playerPos = value; }
+    }
+
+    public int SaveSlot
+    {
+        get { return saveSlot; }
+        set { saveSlot = value; }
     }
 }

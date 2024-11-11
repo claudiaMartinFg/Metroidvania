@@ -4,8 +4,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public GameData gameData;       
-    //public float playerLife;
+    public GameData gameData;
+
+    public int nextSpawnPoint;
 
     private void Awake()
     {
@@ -19,43 +20,47 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        //Temporal
-        LoadData();
+        LoadData(0);
     }
+
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.G))
         {
             gameData.PlayerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
-            SaveData();
+            SaveData(0);
             Debug.Log("He guardado");
         }
 
-        if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.D))
+
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.D))
         {
             PlayerPrefs.DeleteAll();
+            Debug.Log("Se han borrado los datos guardados.");
         }
     }
-    public void SaveData()
+
+    public void SaveData(int saveSlot)
     {
         string data = JsonUtility.ToJson(gameData);
-        PlayerPrefs.SetString("gameData", data);
+        PlayerPrefs.SetString("gameData" + saveSlot, data);
+        PlayerPrefs.Save();
     }
 
-    public void LoadData()
+    public void LoadData(int saveSlot)
     {
-        if (PlayerPrefs.HasKey("gameData") == true)
+        if (PlayerPrefs.HasKey("gameData" + saveSlot))
         {
-            string data = PlayerPrefs.GetString("gameData");
+            string data = PlayerPrefs.GetString("gameData" + saveSlot);
             gameData = JsonUtility.FromJson<GameData>(data);
         }
         else
         {
-            gameData= new GameData();
+            gameData = new GameData();
             gameData.Life = 100;
             gameData.MaxLife = 100;
             gameData.PlayerPos = new Vector3(-4.18f, -1.98f, 0);
+            gameData.SaveSlot = saveSlot;
         }
-
     }
 }
