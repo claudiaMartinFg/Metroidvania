@@ -324,7 +324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 12180417}
   camOffset: {x: 0, y: 3.89, z: -10}
-  limitX: {x: 3.5, y: 10}
+  limitX: {x: 3.5, y: 20}
   limitY: {x: 1.5, y: 2}
 --- !u!1 &591581184
 GameObject:
@@ -3280,7 +3280,7 @@ MonoBehaviour:
     currentScene: 0
     saveSlot: 0
     playerPos: {x: 0, y: 0, z: 0}
-  nextSpawnPoint: 0
+  nextSpawnPoint: 1
 --- !u!4 &1022057062
 Transform:
   m_ObjectHideFlags: 0
@@ -3420,7 +3420,7 @@ Transform:
   m_GameObject: {fileID: 1143720448}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.7889013, y: 0.96, z: -0.11982047}
+  m_LocalPosition: {x: 4.7889013, y: 1.23, z: -0.11982047}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3742,7 +3742,7 @@ CompositeCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -5573,6 +5573,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6620155931693206864, guid: 9f53709b395ea7d4c907fc73c78d2084, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5734,11 +5738,11 @@ PrefabInstance:
     - target: {fileID: 2059676926018658393, guid: 2b3e68f0aa7b6cc4abba1e2ea5ced215, type: 3}
       propertyPath: spawnPoints.Array.data[0]
       value: 
-      objectReference: {fileID: 1893103156}
+      objectReference: {fileID: 711223213}
     - target: {fileID: 2059676926018658393, guid: 2b3e68f0aa7b6cc4abba1e2ea5ced215, type: 3}
       propertyPath: spawnPoints.Array.data[1]
       value: 
-      objectReference: {fileID: 711223213}
+      objectReference: {fileID: 1893103156}
     - target: {fileID: 7856780559423976910, guid: 2b3e68f0aa7b6cc4abba1e2ea5ced215, type: 3}
       propertyPath: m_Name
       value: LevelManager
@@ -5762,7 +5766,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2008397370869509324, guid: 336799c8990cfc141b4c8b0bbb961be1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.19
+      value: -2.87
       objectReference: {fileID: 0}
     - target: {fileID: 2008397370869509324, guid: 336799c8990cfc141b4c8b0bbb961be1, type: 3}
       propertyPath: m_LocalPosition.z
