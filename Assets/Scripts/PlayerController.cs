@@ -20,11 +20,11 @@ public class PlayerController : MonoBehaviour
     private LevelManager levelManager;
 
     [Header("Fireball")]
-    private GameObject fireball;
-    private Transform spawnFire;
-    private float freqFire;
-    private float manaCost;
-    private float speedFire;
+    [SerializeField] GameObject fireball;
+    [SerializeField] Transform spawnFire;
+    [SerializeField] float freqFire;
+    [SerializeField] float manaCost;
+    [SerializeField] float speedFire;
 
     void Start()
     {
@@ -70,6 +70,12 @@ public class PlayerController : MonoBehaviour
 
             animator.SetTrigger("isAttacking");
             isAttacking = true;
+        }
+
+        if (Input.GetButtonDown("Fire2") == true)
+        {
+            Fireball();
+
         }
     }
 
@@ -150,16 +156,17 @@ public class PlayerController : MonoBehaviour
 
     public void Fireball()
     {
-
         if (GameManager.instance.gameData.Mana >= manaCost)
         {
-            GameObject fireballClone = Instantiate(fireball, spawnFire);
+            GameObject fireballClone = Instantiate(fireball, spawnFire.position, Quaternion.identity);
             GameManager.instance.gameData.Mana -= manaCost;
-            fireballClone.GetComponent<Rigidbody2D>().velocity = spawnFire.forward;
+
+            float direction = transform.localScale.y > 0 ? 1 : -1;
+
+            fireballClone.GetComponent<Rigidbody2D>().velocity = new Vector2(direction * speedFire, 0f);
         }
-
-
     }
+
 
 }
 

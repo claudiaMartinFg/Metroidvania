@@ -16,13 +16,17 @@ public class FireBall : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Enemy")
+        if(collision.tag == "Enemigo")
         {
             collision.gameObject.GetComponent<EnemyController>().TakeDamage(damageFireBall); 
         }
-        anim.SetTrigger("hit");
 
-        Invoke("DestroyFireball", 0.33f);
+        if(collision.tag != "Player")
+        {
+            anim.SetTrigger("hit");
+            Invoke("DestroyFireball", 0.33f);
+        }
+
     }
 
     private void DestroyFireball()
