@@ -116,4 +116,24 @@ public class EnemyController : MonoBehaviour
         isAttacking = false;
     }
 
+    private void Die()
+    {
+        animator.SetTrigger("death");
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+
+        if (health <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            animator.SetTrigger("hit");
+        }
+
+    }
+
 }

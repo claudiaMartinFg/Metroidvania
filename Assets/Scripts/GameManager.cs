@@ -59,6 +59,8 @@ public class GameManager : MonoBehaviour
             gameData = new GameData();
             gameData.Life = 100;
             gameData.MaxLife = 100;
+            gameData.Mana = 100;
+            gameData.MaxMana = 100;
             gameData.PlayerPos = new Vector3(-4.18f, -1.98f, 0);
             gameData.SaveSlot = saveSlot;
         }

@@ -34,7 +34,6 @@ public class SaveStone : MonoBehaviour
         {
             GameManager.instance.SaveData(GameManager.instance.gameData.SaveSlot);
             animator.SetBool("SaveGlow",false);
-            Debug.Log("uwuwuwuwuw");
             Destroy(this);
         }
     }

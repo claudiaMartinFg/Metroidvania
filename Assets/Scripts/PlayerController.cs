@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -17,6 +18,13 @@ public class PlayerController : MonoBehaviour
     public bool isAttacking;
 
     private LevelManager levelManager;
+
+    [Header("Fireball")]
+    private GameObject fireball;
+    private Transform spawnFire;
+    private float freqFire;
+    private float manaCost;
+    private float speedFire;
 
     void Start()
     {
@@ -138,6 +146,18 @@ public class PlayerController : MonoBehaviour
             //hit
             animator.SetTrigger("hit");
         }
+    }
+
+    public void Fireball()
+    {
+
+        if (GameManager.instance.gameData.Mana >= manaCost)
+        {
+            GameObject fireballClone = Instantiate(fireball, spawnFire);
+            GameManager.instance.gameData.Mana -= manaCost;
+            fireballClone.GetComponent<Rigidbody2D>().velocity = spawnFire.forward;
+        }
+
 
     }
 

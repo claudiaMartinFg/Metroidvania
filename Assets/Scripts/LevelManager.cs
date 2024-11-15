@@ -8,6 +8,8 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private Image lifeBar;
 
+    [SerializeField] private Image manaBar;
+
     [SerializeField] private Transform[] spawnPoints;
 
     void Start()
@@ -21,6 +23,8 @@ public class LevelManager : MonoBehaviour
     public void UpdateLife()
     {
         lifeBar.fillAmount = GameManager.instance.gameData.Life / GameManager.instance.gameData.MaxLife;
+        manaBar.fillAmount = GameManager.instance.gameData.Mana / GameManager.instance.gameData.MaxMana;
+
     }
 
 }
