@@ -118,7 +118,8 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
-        animator.SetTrigger("death");
+        animator.SetTrigger("dead");
+        Invoke("DestroyEnemy", 0.7f);
     }
 
     public void TakeDamage(float damage)

@@ -21,7 +21,7 @@ public class FireBall : MonoBehaviour
             collision.gameObject.GetComponent<EnemyController>().TakeDamage(damageFireBall); 
         }
 
-        if(collision.tag != "Player")
+        if(collision.tag != "Player" && collision.tag != "Untagged")
         {
             anim.SetTrigger("hit");
             Invoke("DestroyFireball", 0.33f);

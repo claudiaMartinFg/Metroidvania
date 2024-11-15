@@ -6149,7 +6149,7 @@ PrefabInstance:
       objectReference: {fileID: 4553362709167258864, guid: 903c426909469d743846c224fcfe6cea, type: 3}
     - target: {fileID: 8995118937409391665, guid: 336799c8990cfc141b4c8b0bbb961be1, type: 3}
       propertyPath: freqFire
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8995118937409391665, guid: 336799c8990cfc141b4c8b0bbb961be1, type: 3}
       propertyPath: manaCost

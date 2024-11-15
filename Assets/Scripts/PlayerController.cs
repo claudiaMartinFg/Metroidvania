@@ -144,7 +144,7 @@ public class PlayerController : MonoBehaviour
         if (GameManager.instance.gameData.Life <= 0)
         {
             //muerte
-            animator.SetTrigger("death");
+            animator.SetTrigger("dead");
             this.enabled = false;
         }
         else
