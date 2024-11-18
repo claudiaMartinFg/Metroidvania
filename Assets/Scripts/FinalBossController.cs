@@ -15,12 +15,16 @@ public class FinalBossController : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField] private float walkSpeed;
 
-
+    [Header("Roar")]
     [SerializeField] private Transform roarSpawn;
     [SerializeField] private GameObject roarProyectil;
 
     [SerializeField] float projectileSpeed;
     [SerializeField] float secondsToWaitToShootRoarAgain;
+
+    [Header ("Roll")]
+    [SerializeField] float rollSpeed;
+    private bool isColisionado;
     void Start()
     {
         state = bossStates.Idle;
@@ -148,9 +152,33 @@ public class FinalBossController : MonoBehaviour
     }
     IEnumerator Roll()
     {
+        isColisionado = false;
         anim.SetTrigger("Roll");
+        while (!isColisionado)
+        {
+            yield return null;
+        }
+        yield return new WaitForSeconds(1);
 
-        yield return null;
+        int numRandState = Random.Range(1, 4);
+        ChangeState((bossStates)numRandState);
+    }
+
+    public void StartRoll()
+    {
+        rb.velocity = transform.right * -1 * rollSpeed;
+        gameObject.GetComponent<CapsuleCollider2D>().size = new Vector2(0.95f, 0.95f);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "ParedColision")
+        {
+            rb.velocity = Vector2.zero;
+            gameObject.GetComponent<CapsuleCollider2D>().size = new Vector2(1.37f, 0.95f);
+            anim.SetTrigger("Colisionado");
+            isColisionado=true;
+
+        }
     }
 
     public void ShootRoarProyectile()

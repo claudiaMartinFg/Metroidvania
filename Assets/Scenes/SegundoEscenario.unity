@@ -1222,8 +1222,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.061177097, y: -0.07865272}
-  m_Size: {x: 1.858243, y: 0.95812505}
+  m_Offset: {x: 0.046652313, y: -0.078652725}
+  m_Size: {x: 1.3784419, y: 0.9581503}
   m_Direction: 1
 --- !u!50 &1867841130
 Rigidbody2D:
@@ -1273,6 +1273,7 @@ MonoBehaviour:
   roarProyectil: {fileID: 6915753770271991320, guid: 8d459c293ab845348a3f929b55e42fa9, type: 3}
   projectileSpeed: 2
   secondsToWaitToShootRoarAgain: 1
+  rollSpeed: 0
 --- !u!4 &1867841132 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 74822294678092666, guid: 912f096b666b75f4ea4ca3210c610072, type: 3}
