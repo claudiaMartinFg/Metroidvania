@@ -128,12 +128,10 @@ public class FinalBossController : MonoBehaviour
                 transform.eulerAngles = Vector3.zero;
             }
 
-
             distanceVector = player.position - transform.position;
             direccionPlayer = distanceVector.normalized;
             distancia = distanceVector.magnitude;
             yield return null;
-
         }
 
        rb.velocity = Vector2.zero;
@@ -141,7 +139,6 @@ public class FinalBossController : MonoBehaviour
 
        int numRandState = Random.Range(1, 4);
        ChangeState((bossStates)numRandState);
-
     }
 
     IEnumerator Roar()
@@ -160,7 +157,7 @@ public class FinalBossController : MonoBehaviour
         }
         yield return new WaitForSeconds(1);
 
-        int numRandState = Random.Range(1, 4);
+        int numRandState = Random.Range(1, 6);
         ChangeState((bossStates)numRandState);
     }
 
@@ -177,16 +174,13 @@ public class FinalBossController : MonoBehaviour
             gameObject.GetComponent<CapsuleCollider2D>().size = new Vector2(1.37f, 0.95f);
             anim.SetTrigger("Colisionado");
             isColisionado=true;
-
         }
     }
 
     public void ShootRoarProyectile()
     {
-
         GameObject clone = Instantiate(roarProyectil, roarSpawn.position, roarSpawn.rotation);
         clone.GetComponent<Rigidbody2D>().AddForce(clone.transform.right * -1 * projectileSpeed);
-            
     }
 
 }
