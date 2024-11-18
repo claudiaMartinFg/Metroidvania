@@ -15,10 +15,12 @@ public class FinalBossController : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField] private float walkSpeed;
 
+
     [SerializeField] private Transform roarSpawn;
     [SerializeField] private GameObject roarProyectil;
 
     [SerializeField] float projectileSpeed;
+    [SerializeField] float secondsToWaitToShootRoarAgain;
     void Start()
     {
         state = bossStates.Idle;
@@ -41,12 +43,17 @@ public class FinalBossController : MonoBehaviour
                 break;
 
             case bossStates.Rugido:
+
+                StartCoroutine(Roar());
+
                 //anim
                 //lance algo
                 //acabar estado cuando acabe la animacion
                 break;
 
             case bossStates.Roll:
+
+                StartCoroutine(Roll());
                 //anim
                 //moverlo mientras rueda
                 //cuando impacte contra la pared, cambiar de estado
@@ -108,6 +115,16 @@ public class FinalBossController : MonoBehaviour
         while (distancia > stopDistance) {
             
             rb.velocity = new Vector2(walkSpeed * direccionPlayer.x, rb.velocity.y);
+            if (direccionPlayer.x > 0)
+            {
+                transform.eulerAngles = new Vector3(0,180,0);
+            }
+            else 
+            {
+                transform.eulerAngles = Vector3.zero;
+            }
+
+
             distanceVector = player.position - transform.position;
             direccionPlayer = distanceVector.normalized;
             distancia = distanceVector.magnitude;
@@ -115,7 +132,9 @@ public class FinalBossController : MonoBehaviour
 
         }
 
-        rb.velocity = Vector2.zero;
+       rb.velocity = Vector2.zero;
+       anim.SetBool("isWalking", false);
+
        int numRandState = Random.Range(1, 4);
        ChangeState((bossStates)numRandState);
 
@@ -124,6 +143,12 @@ public class FinalBossController : MonoBehaviour
     IEnumerator Roar()
     {
         anim.SetTrigger("Roar");
+
+        yield return new WaitForSeconds(secondsToWaitToShootRoarAgain);
+    }
+    IEnumerator Roll()
+    {
+        anim.SetTrigger("Roll");
 
         yield return null;
     }
