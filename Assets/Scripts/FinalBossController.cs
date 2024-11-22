@@ -29,8 +29,6 @@ public class FinalBossController : MonoBehaviour
     [Header ("Roll")]
     [SerializeField] float rollSpeed;
     [SerializeField] private float stopRollTime;
-    [SerializeField] private bool rolling = false; 
-    [SerializeField] private bool rollingMovement;
     [SerializeField] private bool isColisionado;
 
     [Header("Spikes")]
@@ -65,33 +63,21 @@ public class FinalBossController : MonoBehaviour
         switch (state)
         {
             case bossStates.Idle:
-                //anim quieto
-
                 StartCoroutine(Idle());
                 break;
 
             case bossStates.Rugido:
-
                 StartCoroutine(Roar());
-
-                //anim
-                //lance algo
-                //acabar estado cuando acabe la animacion
                 break;
 
             case bossStates.Roll:
-
                 StartCoroutine(Roll());
-                //anim
-                //moverlo mientras rueda
-                //cuando impacte contra la pared, cambiar de estado
                 break;
 
             case bossStates.Spines:
-                //anim
-                //instanciamos las espinas
-                //que se quede unos segundos anim tired
-                //despues de ese tiempo termina el estado
+
+                StartCoroutine(Spines());
+
                 break;
 
             case bossStates.Jump:
@@ -102,18 +88,10 @@ public class FinalBossController : MonoBehaviour
                 break;
 
             case bossStates.Walk:
-                //anim
-                //mover hacia el jugador
-                //termina el estado a x distancia del player
                 StartCoroutine(Walk());
 
                 break;
 
-
-           // case bossStates.Death:
-                //anim
-                // desactivamos que no pueda hacer nada mas y se quede muerto
-               // break;
 
             default:
 
@@ -163,7 +141,7 @@ public class FinalBossController : MonoBehaviour
 
        int numRandState = Random.Range(1, 4);
         // ChangeState((bossStates)numRandState);
-        ChangeState((bossStates.Rugido));
+        ChangeState((bossStates.Spines));
     }
 
     IEnumerator Roar()
@@ -267,4 +245,43 @@ public class FinalBossController : MonoBehaviour
         }
         yield return null;
     }
+
+    IEnumerator Spines()
+    {
+        tiredTime = 0;
+        isHit = false;
+        anim.SetTrigger("Spike");
+        while(tiredCooldown > tiredTime && !isHit)
+        {
+            tiredTime += Time.deltaTime;
+            yield return null;  
+        }
+    }
+
+    public void LaunchSpikes()
+    {
+        int numberOfSpikes = 10; 
+        float angleStep = 180f / numberOfSpikes; 
+        float currentAngle = -90f; 
+
+        for (int i = 0; i < numberOfSpikes; i++)
+        {
+            GameObject spikeClone = Instantiate(spikeProjectile, spikeSpawnPoint.position, spikeSpawnPoint.rotation);
+
+            float angleInRadians = currentAngle * Mathf.Deg2Rad;
+            Vector2 launchDirection = new Vector2(Mathf.Cos(angleInRadians), Mathf.Sin(angleInRadians));
+
+            spikeClone.GetComponent<Rigidbody2D>().velocity = launchDirection * spikeSpeed;
+
+            currentAngle += angleStep;
+        }
+
+        Invoke("GotTired", 0.5f);
+    }
+
+    private void GotTired()
+    {
+        anim.SetTrigger("Tired");
+    }
+
 }

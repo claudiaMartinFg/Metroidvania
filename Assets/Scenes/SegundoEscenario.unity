@@ -385,6 +385,37 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7086906829613522214, guid: 5992be8947d6b0b4b970199ae88fa5f7, type: 3}
   m_PrefabInstance: {fileID: 599023546}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &609500011
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 609500012}
+  m_Layer: 7
+  m_Name: spawnSpike
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &609500012
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609500011}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.007, y: 0.258, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1867841132}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &710290245
 GameObject:
   m_ObjectHideFlags: 0
@@ -1328,6 +1359,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 74822294678092666, guid: 912f096b666b75f4ea4ca3210c610072, type: 3}
       insertIndex: -1
       addedObject: {fileID: 864641899}
+    - targetCorrespondingSourceObject: {fileID: 74822294678092666, guid: 912f096b666b75f4ea4ca3210c610072, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 609500012}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 74822294678092665, guid: 912f096b666b75f4ea4ca3210c610072, type: 3}
       insertIndex: -1
@@ -1433,13 +1467,11 @@ MonoBehaviour:
   secondsToWaitToShootRoarAgain: 1
   rollSpeed: 3
   stopRollTime: 0
-  rolling: 0
-  rollingMovement: 0
   isColisionado: 0
-  spikeProjectile: {fileID: 0}
-  spikeSpawnPoint: {fileID: 0}
-  spikeSpeed: 0
-  tiredCooldown: 0
+  spikeProjectile: {fileID: 2541543652879258604, guid: 23b558b4da3f0c146b384b0436b23eb5, type: 3}
+  spikeSpawnPoint: {fileID: 609500012}
+  spikeSpeed: 15
+  tiredCooldown: 2
   jumpForce: 0
   jumpSpeed: 0
   knockbackForce: 0

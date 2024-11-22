@@ -83,7 +83,6 @@ public class PlayerController : MonoBehaviour
     
     private void FixedUpdate()
     {
-
         if (!isAttacking)
         {
             rb.velocity = new Vector2(speed * horizontal, rb.velocity.y);
