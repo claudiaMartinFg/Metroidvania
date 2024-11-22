@@ -26,7 +26,6 @@ public class FireBall : MonoBehaviour
             anim.SetTrigger("hit");
             Invoke("DestroyFireball", 0.33f);
         }
-
     }
 
     private void DestroyFireball()

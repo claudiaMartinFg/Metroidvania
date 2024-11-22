@@ -15,7 +15,7 @@ public class FinalBossController : MonoBehaviour
 
     private Rigidbody2D rb;
     [SerializeField] private float walkSpeed;
-
+    [SerializeField] private int knockback;
     [SerializeField] public float health;
     [SerializeField] public float maxHealth;
     [SerializeField] private float damage;
@@ -23,15 +23,32 @@ public class FinalBossController : MonoBehaviour
     [Header("Roar")]
     [SerializeField] private Transform roarSpawn;
     [SerializeField] private GameObject roarProyectil;
-
     [SerializeField] float projectileSpeed;
     [SerializeField] float secondsToWaitToShootRoarAgain;
 
     [Header ("Roll")]
     [SerializeField] float rollSpeed;
-    private bool isColisionado;
+    [SerializeField] private float stopRollTime;
+    [SerializeField] private bool rolling = false; 
+    [SerializeField] private bool rollingMovement;
+    [SerializeField] private bool isColisionado;
 
+    [Header("Spikes")]
+    [SerializeField] private GameObject spikeProjectile;
+    [SerializeField] private Transform spikeSpawnPoint;
+    [SerializeField] private float spikeSpeed;
+    [SerializeField] private float tiredCooldown;
+    private float tiredTime;
+    private bool isHit;
+
+    [Header("Jump")]
+    [SerializeField] private float jumpForce;
+    [SerializeField] private float jumpSpeed;
+    private bool isJumping = false;
+
+    [Header("Knockback")]
     [SerializeField] private int knockbackForce;
+
     void Start()
     {
         state = bossStates.Idle;
@@ -93,10 +110,10 @@ public class FinalBossController : MonoBehaviour
                 break;
 
 
-            case bossStates.Death:
+           // case bossStates.Death:
                 //anim
                 // desactivamos que no pueda hacer nada mas y se quede muerto
-                break;
+               // break;
 
             default:
 
@@ -145,7 +162,8 @@ public class FinalBossController : MonoBehaviour
        anim.SetBool("isWalking", false);
 
        int numRandState = Random.Range(1, 4);
-       ChangeState((bossStates)numRandState);
+        // ChangeState((bossStates)numRandState);
+        ChangeState((bossStates.Rugido));
     }
 
     IEnumerator Roar()
@@ -161,9 +179,11 @@ public class FinalBossController : MonoBehaviour
         yield return new WaitForSeconds(1.2f);
         while (!isColisionado)
         {
+            rb.velocity = transform.right * -1 * rollSpeed;    
             yield return null;
         }
-        yield return new WaitForSeconds(1);
+
+        yield return new WaitForSeconds(stopRollTime);
 
         int numRandState = Random.Range(1, 6);
         ChangeState((bossStates)numRandState);
@@ -178,11 +198,21 @@ public class FinalBossController : MonoBehaviour
     {
         if(collision.gameObject.tag == "ParedColision")
         {
+            isColisionado = true;
             rb.velocity = Vector2.zero;
             gameObject.GetComponent<CapsuleCollider2D>().size = new Vector2(1.37f, 0.95f);
-            anim.SetTrigger("Colisionado");
-            isColisionado=true;
+            anim.SetTrigger("Colisionado");    
         }
+
+        if(collision.gameObject.tag == "Player")
+        {
+            gameObject.layer = 8;
+            Invoke("RestoreCollision", 1.5f);
+        }
+    }
+    private void RestoreCollision()
+    {
+        gameObject.layer = 0;
     }
 
     public void ShootRoarProyectile()

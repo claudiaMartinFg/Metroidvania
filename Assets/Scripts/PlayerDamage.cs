@@ -20,5 +20,11 @@ public class PlayerDamage : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (collision.tag == "ParedColision")
+        {
+            Destroy(gameObject);
+        }
+
     }
 }
