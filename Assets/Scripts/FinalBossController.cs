@@ -202,8 +202,10 @@ public class FinalBossController : MonoBehaviour
 
         if (health <= 0)
         {
-
             anim.SetTrigger("Dead");
+            StopAllCoroutines();
+            GetComponent<CapsuleCollider2D>().enabled = false;
+            rb.isKinematic = true;
         }
         else
         {
@@ -215,7 +217,6 @@ public class FinalBossController : MonoBehaviour
 
     IEnumerator ChangeColorHit()
     {
-
         Color colorInicial = Color.white;  
         Color colorFinal = Color.red;
         float t = 0;
