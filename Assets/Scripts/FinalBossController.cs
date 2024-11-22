@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FinalBossController : MonoBehaviour
@@ -15,6 +16,10 @@ public class FinalBossController : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField] private float walkSpeed;
 
+    [SerializeField] public float health;
+    [SerializeField] public float maxHealth;
+    [SerializeField] private float damage;
+
     [Header("Roar")]
     [SerializeField] private Transform roarSpawn;
     [SerializeField] private GameObject roarProyectil;
@@ -25,6 +30,8 @@ public class FinalBossController : MonoBehaviour
     [Header ("Roll")]
     [SerializeField] float rollSpeed;
     private bool isColisionado;
+
+    [SerializeField] private int knockbackForce;
     void Start()
     {
         state = bossStates.Idle;
@@ -151,6 +158,7 @@ public class FinalBossController : MonoBehaviour
     {
         isColisionado = false;
         anim.SetTrigger("Roll");
+        yield return new WaitForSeconds(1.2f);
         while (!isColisionado)
         {
             yield return null;
@@ -183,4 +191,49 @@ public class FinalBossController : MonoBehaviour
         clone.GetComponent<Rigidbody2D>().AddForce(clone.transform.right * -1 * projectileSpeed);
     }
 
+    void AddKnockBackForceToPlayer()
+    {
+        player.GetComponent<Rigidbody2D>().AddForce(transform.right * -1 * knockbackForce);
+    }
+
+    public void TakeDamage(float _damage)
+    {
+        health -= _damage;
+
+        if (health <= 0)
+        {
+
+            anim.SetTrigger("Dead");
+        }
+        else
+        {
+            StartCoroutine(ChangeColorHit());
+
+        }
+    }
+
+
+    IEnumerator ChangeColorHit()
+    {
+
+        Color colorInicial = Color.white;  
+        Color colorFinal = Color.red;
+        float t = 0;
+        SpriteRenderer bossSprite = GetComponent<SpriteRenderer>();
+
+        while (t < 1)
+        {
+            bossSprite.color = Color.Lerp(colorInicial, colorFinal, t);
+            t += Time.deltaTime*3f;
+            yield return null;
+        }
+
+        while (t > 0)
+        {
+            bossSprite.color = Color.Lerp(colorInicial, colorFinal, t);
+            t -= Time.deltaTime * 3f;
+            yield return null;
+        }
+        yield return null;
+    }
 }

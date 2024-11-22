@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isGrounded;
     public bool isAttacking;
+    [SerializeField] private float damage;
 
     private LevelManager levelManager;
 
@@ -129,10 +130,24 @@ public class PlayerController : MonoBehaviour
         {
             case "Enemigo":
 
-                Debug.Log("he tocado al enemigo");
+
+                try
+                {
+                    collision.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
+                }
+                catch 
+                {
+                    collision.gameObject.GetComponent<FinalBossController>().TakeDamage(damage);
+                }
 
                 break;
         }
+
+    }
+
+    public void IsHit()
+    {
+        //programar que cuando el boss le ataque se tenga que quedar quieto
 
     }
 

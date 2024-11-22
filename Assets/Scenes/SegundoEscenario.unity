@@ -721,6 +721,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2715432576189103145, guid: 770ed9fd204c35f47a7724743b5baece, type: 3}
   m_PrefabInstance: {fileID: 1109620432443224214}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1075994246 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2799297076453613082, guid: 770ed9fd204c35f47a7724743b5baece, type: 3}
+  m_PrefabInstance: {fileID: 1109620432443224214}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1136345041
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,6 +819,60 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 16.6, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1159462602
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1159462604}
+  - component: {fileID: 1159462603}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1159462603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159462602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30b2d6cf3e7689d44b1459a4220e2e14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameData:
+    life: 0
+    maxLife: 0
+    currentScene: 0
+    saveSlot: 0
+    fireRune: 0
+    mana: 0
+    maxMana: 0
+    playerPos: {x: 0, y: 0, z: 0}
+  nextSpawnPoint: 0
+--- !u!4 &1159462604
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159462602}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 19.017815, y: 0.18394288, z: -0.09214639}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -996,6 +1061,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 599023547}
     - target: {fileID: 2059676926018658393, guid: 2b3e68f0aa7b6cc4abba1e2ea5ced215, type: 3}
+      propertyPath: manaBar
+      value: 
+      objectReference: {fileID: 1075994246}
+    - target: {fileID: 2059676926018658393, guid: 2b3e68f0aa7b6cc4abba1e2ea5ced215, type: 3}
       propertyPath: spawnPoints.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -1111,6 +1180,14 @@ PrefabInstance:
     - target: {fileID: 74822294678092665, guid: 912f096b666b75f4ea4ca3210c610072, type: 3}
       propertyPath: m_Name
       value: FinalBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 74822294678092665, guid: 912f096b666b75f4ea4ca3210c610072, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 74822294678092665, guid: 912f096b666b75f4ea4ca3210c610072, type: 3}
+      propertyPath: m_TagString
+      value: Enemigo
       objectReference: {fileID: 0}
     - target: {fileID: 74822294678092666, guid: 912f096b666b75f4ea4ca3210c610072, type: 3}
       propertyPath: m_LocalScale.x
@@ -1269,11 +1346,15 @@ MonoBehaviour:
   player: {fileID: 2008397372187020045}
   stopDistance: 8
   walkSpeed: 1
+  health: 20
+  maxHealth: 20
+  damage: 0
   roarSpawn: {fileID: 864641899}
   roarProyectil: {fileID: 6915753770271991320, guid: 8d459c293ab845348a3f929b55e42fa9, type: 3}
-  projectileSpeed: 2
+  projectileSpeed: 3
   secondsToWaitToShootRoarAgain: 1
   rollSpeed: 0
+  knockbackForce: 0
 --- !u!4 &1867841132 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 74822294678092666, guid: 912f096b666b75f4ea4ca3210c610072, type: 3}
@@ -1788,8 +1869,9 @@ MonoBehaviour:
   jumpForce: 6
   animator: {fileID: 8782049917596422496}
   isAttacking: 0
-  fireball: {fileID: 0}
-  spawnFire: {fileID: 0}
+  damage: 5
+  fireball: {fileID: 4553362709167258864, guid: 903c426909469d743846c224fcfe6cea, type: 3}
+  spawnFire: {fileID: 1899028399}
   freqFire: 0
   manaCost: 0
   speedFire: 0
@@ -1809,3 +1891,4 @@ SceneRoots:
   - {fileID: 908738314}
   - {fileID: 960382193}
   - {fileID: 1867841127}
+  - {fileID: 1159462604}
