@@ -41,7 +41,6 @@ public class Rune : MonoBehaviour
                     break;
 
                 case "AirRune":
-
                     GameManager.instance.gameData.AirRune = 1;
                     Destroy (gameObject);
                     break;
