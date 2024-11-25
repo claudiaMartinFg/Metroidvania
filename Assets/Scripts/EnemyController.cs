@@ -15,6 +15,9 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private float damagingRate;
 
+    [SerializeField] private float damage;
+
+
     [SerializeField] private Animator animator;
 
     private Transform player;
@@ -89,8 +92,22 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
+            gameObject.layer = 8;
+            Invoke("RestoreCollision", 1.5f);
+        }
+    }
 
-    private void Attack()
+    private void RestoreCollision()
+    {
+        gameObject.layer = 0;
+    }
+
+private void Attack()
     {
         if (timePass>=attackRate)
         {

@@ -7,28 +7,30 @@ public class PlayerDamage : MonoBehaviour
 
     [SerializeField] private float damage;
 
-    [SerializeField] private bool proyectil;
+    //[SerializeField] private bool proyectil;
 
-    [SerializeField] private bool doingFall=false;
-    private Rigidbody2D rb;
+    //[SerializeField] private bool doingFall=false;
+   // private Rigidbody2D rb;
 
     private void Start()
     {
-        if (doingFall)
+        /*if (doingFall)
         {
             rb = GetComponent<Rigidbody2D>();
-        }
+        }*/
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
             collision.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
-        }
-        if (proyectil == true)
-        {
             Destroy(gameObject);
         }
+
+        /*if (proyectil == true)
+        {
+            Destroy(gameObject);
+        }*/
 
         if (collision.tag == "ParedColision" || collision.tag == "Ground")
         {

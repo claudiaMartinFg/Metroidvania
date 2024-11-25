@@ -141,13 +141,12 @@ public class FinalBossController : MonoBehaviour
 
        int numRandState = Random.Range(1, 4);
         // ChangeState((bossStates)numRandState);
-        ChangeState((bossStates.Spines));
+        ChangeState((bossStates.Roll));
     }
 
     IEnumerator Roar()
     {
         anim.SetTrigger("Roar");
-
         yield return new WaitForSeconds(secondsToWaitToShootRoarAgain);
     }
     IEnumerator Roll()
@@ -181,19 +180,29 @@ public class FinalBossController : MonoBehaviour
             isColisionado = true;
             rb.velocity = Vector2.zero;
             gameObject.GetComponent<CapsuleCollider2D>().size = new Vector2(1.37f, 0.95f);
-            anim.SetTrigger("Colisionado");    
+            anim.SetTrigger("Colisionado");
         }
 
-       /* if(collision.gameObject.tag == "Player")
-        {
+         if(collision.gameObject.tag == "Player")
+         {
+            collision.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
             gameObject.layer = 8;
             Invoke("RestoreCollision", 1.5f);
-        }*/
+        }
     }
+
     private void RestoreCollision()
     {
         gameObject.layer = 0;
     }
+
+   /* pruebas  
+    * private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+        }
+    }*/
 
     public void ShootRoarProyectile()
     {

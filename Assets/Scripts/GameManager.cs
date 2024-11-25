@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     {
         if (PlayerPrefs.HasKey("gameData" + saveSlot))
         {
-            //PlayerPrefs.DeleteAll();
+            PlayerPrefs.DeleteAll();
             string data = PlayerPrefs.GetString("gameData" + saveSlot);
             gameData = JsonUtility.FromJson<GameData>(data);
         }

@@ -77,10 +77,9 @@ public class PlayerController : MonoBehaviour
             isAttacking = true;
         }
 
-        if (Input.GetButtonDown("Fire2") == true)
+        if (Input.GetButtonDown("Fire2") == true && GameManager.instance.gameData.FireRune==true)
         {
             Fireball();
-
         }
     }
 
@@ -146,8 +145,6 @@ public class PlayerController : MonoBehaviour
         switch (collision.tag)
         {
             case "Enemigo":
-
-
                 try
                 {
                     collision.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
@@ -159,7 +156,6 @@ public class PlayerController : MonoBehaviour
 
                 break;
         }
-
     }
 
     public void IsHit()
@@ -192,7 +188,7 @@ public class PlayerController : MonoBehaviour
         {
             GameObject fireballClone = Instantiate(fireball, spawnFire.position, Quaternion.identity);
             GameManager.instance.gameData.Mana -= manaCost;
-
+            levelManager.UpdateLife();
             float direction = transform.localScale.y > 0 ? 1 : -1;
 
             fireballClone.GetComponent<Rigidbody2D>().velocity = new Vector2(direction * speedFire, 0f);
