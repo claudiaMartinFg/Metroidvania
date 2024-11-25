@@ -1700,8 +1700,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.046652313, y: -0.078652725}
-  m_Size: {x: 1.3784419, y: 0.9581503}
+  m_Offset: {x: 0.046652317, y: -0.044619124}
+  m_Size: {x: 1.378442, y: 0.8900849}
   m_Direction: 1
 --- !u!50 &1867841130
 Rigidbody2D:
@@ -1750,7 +1750,7 @@ MonoBehaviour:
   knockback: 0
   health: 20
   maxHealth: 20
-  damage: 1
+  damage: 10
   roarSpawn: {fileID: 864641899}
   roarProyectil: {fileID: 6915753770271991320, guid: 8d459c293ab845348a3f929b55e42fa9, type: 3}
   projectileSpeed: 60
