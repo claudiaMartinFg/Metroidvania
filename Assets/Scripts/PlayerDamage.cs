@@ -37,15 +37,14 @@ public class PlayerDamage : MonoBehaviour
 
     }
 
-    private void Update()
+    /*private void Update()
     {
         if (doingFall)
         {
             Vector3 dirToLook = rb.velocity;
-
             Quaternion rot = Quaternion.LookRotation(dirToLook);
-
             transform.rotation = rot;
+            transform.Rotate(new Vector3(0,90,0),Space.Self);
         }
-    }
+    }*/
 }

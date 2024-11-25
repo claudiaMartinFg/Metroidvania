@@ -10,7 +10,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField] private float speed;
     private float horizontal;
-    private bool jump;
+    //private bool jump;
+    private int jumpCount;
+
     [SerializeField] private float jumpForce;
     [SerializeField] private Animator animator;
 
@@ -61,9 +63,11 @@ public class PlayerController : MonoBehaviour
         }
        
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && jumpCount < GameManager.instance.gameData.AirRune)
         {
-            jump = true;
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            animator.SetBool("isJumping", true);
+            jumpCount++;
         }
 
         if (Input.GetButtonDown("Fire1")==true && rb.velocity.y==0)
@@ -86,17 +90,6 @@ public class PlayerController : MonoBehaviour
         if (!isAttacking)
         {
             rb.velocity = new Vector2(speed * horizontal, rb.velocity.y);
-
-            if (jump)
-            {
-                if (isGrounded)
-                {
-                    rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-                    animator.SetBool("isJumping", true);
-                    isGrounded = false;
-                }
-                jump = false;
-            }
         }
 
         if (rb.velocity.y < 0)
@@ -105,13 +98,38 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
+            if (collision.GetContact(collision.contactCount - 1).normal.y >= 0.5f)
+
+                animator.SetBool("isJumping", false);
+                jumpCount = 0;
+
             isGrounded = true;
+            //animator.SetBool("inWall",false);
             animator.SetBool("isGrounded", true);
         }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            if (collision.GetContact(0).normal.y == 0){
+
+                //animator.SetBool("inWall", true);
+                //rb.velocity = new Vector2(rb.velocity);
+            }
+        }
+    }
+
+
+    void WallJump()
+    {
+        //cosas comentadas?
     }
 
     private void OnCollisionExit2D(Collision2D collision)

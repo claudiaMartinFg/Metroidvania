@@ -18,6 +18,10 @@ public class Rune : MonoBehaviour
                 break;
 
             case "AirRune":
+                if (GameManager.instance.gameData.AirRune > 2)
+                {
+                    Destroy(gameObject);
+                }
                 break;
 
             case "EarthRune":
@@ -32,13 +36,14 @@ public class Rune : MonoBehaviour
             switch (runeName)
             {
                 case "FireRune":
-                    if (GameManager.instance.gameData.FireRune != true)
-                    {
-                        GameManager.instance.gameData.FireRune = true;
-                    }
+                    GameManager.instance.gameData.FireRune = true;
+                    Destroy(gameObject);
                     break;
 
                 case "AirRune":
+
+                    GameManager.instance.gameData.AirRune = 1;
+                    Destroy (gameObject);
                     break;
 
                 case "EarthRune":

@@ -127,4 +127,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 3
   proyectil: 0
-  doingFall: 1
+  doingFall: 0

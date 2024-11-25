@@ -264,9 +264,9 @@ public class FinalBossController : MonoBehaviour
 
     public void LaunchSpikes()
     {
-        int numberOfSpikes = 10; 
-        float angleStep = 180f / numberOfSpikes; 
-        float currentAngle = 0f; 
+        int numberOfSpikes = 10;
+        float angleStep = 180f / numberOfSpikes;
+        float currentAngle = 0f;
 
         for (int i = 0; i < numberOfSpikes; i++)
         {
@@ -275,7 +275,11 @@ public class FinalBossController : MonoBehaviour
             float angleInRadians = currentAngle * Mathf.Deg2Rad;
             Vector2 launchDirection = new Vector2(Mathf.Cos(angleInRadians), Mathf.Sin(angleInRadians));
 
-            spikeClone.GetComponent<Rigidbody2D>().velocity = launchDirection * spikeSpeed;
+            Rigidbody2D rb = spikeClone.GetComponent<Rigidbody2D>();
+            rb.velocity = launchDirection * spikeSpeed;
+
+            float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
+            spikeClone.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
             currentAngle += angleStep;
         }
