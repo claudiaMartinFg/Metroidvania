@@ -119,8 +119,8 @@ public class FinalBossController : MonoBehaviour
         float distancia = distanceVector.magnitude;
         
         while (distancia > stopDistance) {
-            
-            rb.velocity = new Vector2(walkSpeed * direccionPlayer.x, rb.velocity.y);
+
+            transform.Translate(new Vector2(walkSpeed * direccionPlayer.x, 0)*Time.deltaTime,Space.World);
             if (direccionPlayer.x > 0)
             {
                 transform.eulerAngles = new Vector3(0,180,0);
@@ -157,7 +157,8 @@ public class FinalBossController : MonoBehaviour
         yield return new WaitForSeconds(1.2f);
         while (!isColisionado)
         {
-            rb.velocity = transform.right * -1 * rollSpeed;    
+            transform.Translate(transform.right * -1 * rollSpeed * Time.deltaTime,Space.World);
+            //rb.velocity = transform.right * -1 * rollSpeed;    
             yield return null;
         }
 
@@ -169,7 +170,8 @@ public class FinalBossController : MonoBehaviour
 
     public void StartRoll()
     {
-        rb.velocity = transform.right * -1 * rollSpeed;
+        transform.Translate(transform.right * -1 * rollSpeed, Space.World);
+       // rb.velocity = transform.right * -1 * rollSpeed;
         gameObject.GetComponent<CapsuleCollider2D>().size = new Vector2(0.95f, 0.95f);
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -182,11 +184,11 @@ public class FinalBossController : MonoBehaviour
             anim.SetTrigger("Colisionado");    
         }
 
-        if(collision.gameObject.tag == "Player")
+       /* if(collision.gameObject.tag == "Player")
         {
             gameObject.layer = 8;
             Invoke("RestoreCollision", 1.5f);
-        }
+        }*/
     }
     private void RestoreCollision()
     {
@@ -256,13 +258,15 @@ public class FinalBossController : MonoBehaviour
             tiredTime += Time.deltaTime;
             yield return null;  
         }
+
+
     }
 
     public void LaunchSpikes()
     {
         int numberOfSpikes = 10; 
         float angleStep = 180f / numberOfSpikes; 
-        float currentAngle = -90f; 
+        float currentAngle = 0f; 
 
         for (int i = 0; i < numberOfSpikes; i++)
         {

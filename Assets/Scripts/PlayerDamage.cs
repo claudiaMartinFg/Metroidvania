@@ -8,8 +8,17 @@ public class PlayerDamage : MonoBehaviour
     [SerializeField] private float damage;
 
     [SerializeField] private bool proyectil;
-       
 
+    [SerializeField] private bool doingFall=false;
+    private Rigidbody2D rb;
+
+    private void Start()
+    {
+        if (doingFall)
+        {
+            rb = GetComponent<Rigidbody2D>();
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
@@ -26,5 +35,17 @@ public class PlayerDamage : MonoBehaviour
             Destroy(gameObject);
         }
 
+    }
+
+    private void Update()
+    {
+        if (doingFall)
+        {
+            Vector3 dirToLook = rb.velocity;
+
+            Quaternion rot = Quaternion.LookRotation(dirToLook);
+
+            transform.rotation = rot;
+        }
     }
 }
