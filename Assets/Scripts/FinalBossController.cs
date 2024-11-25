@@ -258,8 +258,6 @@ public class FinalBossController : MonoBehaviour
             tiredTime += Time.deltaTime;
             yield return null;  
         }
-
-
     }
 
     public void LaunchSpikes()
@@ -279,13 +277,16 @@ public class FinalBossController : MonoBehaviour
             rb.velocity = launchDirection * spikeSpeed;
 
             float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
-            spikeClone.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+            //codigo profe en el PlayerDamage para que las spines sigan la direccion de su velocidad. Aqui cambiado 
+            spikeClone.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
 
             currentAngle += angleStep;
         }
 
         Invoke("GotTired", 0.5f);
     }
+
 
     private void GotTired()
     {

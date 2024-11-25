@@ -134,7 +134,5 @@ public class EnemyController : MonoBehaviour
         {
             animator.SetTrigger("hit");
         }
-
     }
-
 }

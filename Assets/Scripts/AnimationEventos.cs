@@ -7,9 +7,7 @@ public class AnimationEventos : MonoBehaviour
     [SerializeField] private PlayerController playerController;
     public void FinishAttack()
     {
-
         playerController.isAttacking = false;
-
     }
 
 }
