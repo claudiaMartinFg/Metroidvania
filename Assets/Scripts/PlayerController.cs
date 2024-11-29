@@ -42,8 +42,9 @@ public class PlayerController : MonoBehaviour
         fireBallTimePass += Time.deltaTime;
         if (!isAttacking)
         {
-           // horizontal = Input.GetAxis("Horizontal");
-
+#if UNITY_ANDROID == false
+            horizontal = Input.GetAxis("Horizontal");
+#endif
             if (horizontal > 0)
             {
                 transform.eulerAngles = Vector3.zero;
