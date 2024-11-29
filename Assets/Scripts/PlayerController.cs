@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float freqFire;
     [SerializeField] float manaCost;
     [SerializeField] float speedFire;
+    [SerializeField] float fireBallTimePass;
+
 
     void Start()
     {
@@ -37,10 +39,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
+        fireBallTimePass += Time.deltaTime;
         if (!isAttacking)
         {
-            horizontal = Input.GetAxis("Horizontal");
+           // horizontal = Input.GetAxis("Horizontal");
 
             if (horizontal > 0)
             {
@@ -70,12 +72,12 @@ public class PlayerController : MonoBehaviour
             jumpCount++;
         }
 
-        if (Input.GetButtonDown("Fire1")==true && rb.velocity.y==0)
+      /*  if (Input.GetButtonDown("Fire1")==true && rb.velocity.y==0)
         {
 
             animator.SetTrigger("isAttacking");
             isAttacking = true;
-        }
+        }*/
 
         if (Input.GetButtonDown("Fire2") == true && GameManager.instance.gameData.FireRune==true)
         {
@@ -83,7 +85,28 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    
+    //Inputs Movil
+    public void JumpButton()
+    {
+        if (jumpCount < GameManager.instance.gameData.AirRune)
+        {
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            animator.SetBool("isJumping", true);
+            jumpCount++;
+            //audio manager
+            //AudioManager.instance.PlayerSFX(jumpSfx, 1f);
+        }
+    }
+    public void MoveButtonDown(int _horizontal)
+    {
+        horizontal = _horizontal;
+    }
+    public void MoveButtonUp()
+    {
+        horizontal = 0;
+    }
+
+
     private void FixedUpdate()
     {
         if (!isAttacking)
