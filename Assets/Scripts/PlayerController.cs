@@ -73,12 +73,12 @@ public class PlayerController : MonoBehaviour
             jumpCount++;
         }
 
-      /*  if (Input.GetButtonDown("Fire1")==true && rb.velocity.y==0)
+        if (Input.GetButtonDown("Fire1")==true && rb.velocity.y==0)
         {
 
             animator.SetTrigger("isAttacking");
             isAttacking = true;
-        }*/
+        }
 
         if (Input.GetButtonDown("Fire2") == true && GameManager.instance.gameData.FireRune==true)
         {
@@ -100,13 +100,16 @@ public class PlayerController : MonoBehaviour
     }
     public void MoveButtonDown(int _horizontal)
     {
+        Debug.Log("clico boton");
         horizontal = _horizontal;
     }
     public void MoveButtonUp()
     {
+        Debug.Log("levanto clic boton");
         horizontal = 0;
     }
 
+    // fin inputs movil
 
     private void FixedUpdate()
     {
@@ -190,8 +193,19 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float _damage)
     {
-        GameManager.instance.gameData.Life -= _damage;
+
+        if (GameManager.instance.gameData.EarthRune == true)
+        {
+            //pierde un 50% menos de vida si tiene la runa de tierra
+            GameManager.instance.gameData.Life -= _damage/2f;
+        }
+        else
+        {
+            GameManager.instance.gameData.Life -= _damage;
+        }
+
         levelManager.UpdateLife();
+
 
         if (GameManager.instance.gameData.Life <= 0)
         {

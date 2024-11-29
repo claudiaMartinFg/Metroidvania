@@ -25,6 +25,11 @@ public class Rune : MonoBehaviour
                 break;
 
             case "EarthRune":
+                if (GameManager.instance.gameData.EarthRune == true)
+                {
+                    Destroy(gameObject);
+                }
+
                 break;
         }
     }
@@ -46,6 +51,8 @@ public class Rune : MonoBehaviour
                     break;
 
                 case "EarthRune":
+                    GameManager.instance.gameData.EarthRune = true;
+                    Destroy(gameObject);
                     break;
             }
 

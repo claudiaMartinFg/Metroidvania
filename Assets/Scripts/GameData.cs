@@ -12,6 +12,8 @@ public class GameData
     [SerializeField] private int saveSlot;
     [SerializeField] private bool fireRune;
     [SerializeField] private int airRune;
+    [SerializeField] private bool earthRune;
+
     [SerializeField] private float mana;
     [SerializeField] private float maxMana;
 
@@ -48,11 +50,7 @@ public class GameData
         set { saveSlot = value; }
     }
 
-    public bool FireRune
-    {
-        get { return fireRune; }
-        set { fireRune = value; }
-    }
+
     public float Mana
     {
         get { return mana; }
@@ -66,9 +64,21 @@ public class GameData
         set { maxMana = value; }
     }
 
+    public bool FireRune
+    {
+        get { return fireRune; }
+        set { fireRune = value; }
+    }
+
     public int AirRune 
     { 
         get { return airRune; }
         set { airRune = value; }
     }     
+
+    public bool EarthRune
+    {
+        get { return earthRune; }
+        set { earthRune = value; }
+    }
 }
